@@ -1,13 +1,13 @@
 import { cn } from "../lib/utils";
 
-export function TruepalLogo({ className }: { className?: string }) {
+export function TruepalLogo({ className, isLight }: { className?: string, isLight?: boolean }) {
   return (
     <div className={cn("flex flex-col", className)}>
       <div className="flex items-center text-4xl font-extrabold uppercase tracking-tight">
-        <span className="text-truepal-blue">TRUE</span>
+        <span className={cn("transition-colors", isLight ? "text-white" : "text-truepal-blue")}>TRUE</span>
         <span className="text-truepal-green flex items-center gap-1">
           P
-          <span className="inline-flex h-7 w-7 items-center justify-center rounded-md bg-truepal-green text-white">
+          <span className={cn("inline-flex h-7 w-7 items-center justify-center rounded-md transition-colors", isLight ? "bg-white text-truepal-green" : "bg-truepal-green text-white")}>
             <svg
               viewBox="0 0 24 24"
               fill="none"
@@ -21,7 +21,7 @@ export function TruepalLogo({ className }: { className?: string }) {
           L
         </span>
       </div>
-      <span className="text-[0.6rem] font-bold tracking-[0.1em] text-truepal-blue uppercase text-left ml-0.5">
+      <span className={cn("text-[0.6rem] font-bold tracking-[0.1em] uppercase text-left ml-0.5 transition-colors", isLight ? "text-blue-100" : "text-truepal-blue")}>
         For Trading and Contracting
       </span>
     </div>

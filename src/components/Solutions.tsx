@@ -1,38 +1,6 @@
 import { motion } from "motion/react";
-import { Droplets, Waves, ThermometerSun, Sparkles, LocateIcon, Map } from "lucide-react";
-
-const services = [
-  {
-    title: "Swimming Pools",
-    description: "Residential & Commercial (Skimmer, Overflow, Infinity).",
-    icon: Waves,
-    image: "https://images.unsplash.com/photo-1576013551627-0cc20b96c2a7?auto=format&fit=crop&w=800&q=80"
-  },
-  {
-    title: "Fountains & Water Features",
-    description: "Architectural and interactive fountains.",
-    icon: Droplets,
-    image: "https://images.unsplash.com/photo-1543158097-f58c738e4a9e?auto=format&fit=crop&w=800&q=80"
-  },
-  {
-    title: "Lagoons",
-    description: "Large-scale artificial lakes and lagoons systems.",
-    icon: Map,
-    image: "https://images.unsplash.com/photo-1540206395-68808572332f?auto=format&fit=crop&w=800&q=80"
-  },
-  {
-    title: "Heating Solutions",
-    description: "Advanced heat pumps and boiler systems for pools & Jacuzzis.",
-    icon: ThermometerSun,
-    image: "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=800&q=80"
-  },
-  {
-    title: "Wellness & Jacuzzis",
-    description: "Custom-built and pre-fabricated luxury systems.",
-    icon: Sparkles,
-    image: "https://images.unsplash.com/photo-1590487988358-854746654261?auto=format&fit=crop&w=800&q=80"
-  }
-];
+import { Link } from "react-router-dom";
+import { servicesData } from "../data/services";
 
 export function Solutions() {
   return (
@@ -47,34 +15,41 @@ export function Solutions() {
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {services.map((service, index) => (
+          {servicesData.map((service, index) => (
             <motion.div
-              key={index}
+              key={service.id}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1, duration: 0.5 }}
-              className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-shadow group border border-gray-100"
             >
-              <div className="h-48 overflow-hidden relative">
-                <div className="absolute inset-0 bg-truepal-blue/20 group-hover:bg-transparent transition-colors z-10" />
-                <img 
-                  src={service.image} 
-                  alt={service.title} 
-                  className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700"
-                />
-                <div className="absolute top-4 right-4 bg-white/90 backdrop-blur p-3 rounded-xl z-20 shadow-sm text-truepal-green">
-                  <service.icon size={24} />
+              <Link to={`/solutions/${service.id}`} className="block h-full bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-shadow group border border-gray-100 flex flex-col">
+                <div className="h-48 overflow-hidden relative shrink-0">
+                  <div className="absolute inset-0 bg-truepal-blue/20 group-hover:bg-transparent transition-colors z-10" />
+                  <img 
+                    src={service.image} 
+                    alt={service.title} 
+                    className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700"
+                  />
+                  <div className="absolute top-4 right-4 bg-white/90 backdrop-blur p-3 rounded-xl z-20 shadow-sm text-truepal-green">
+                    <service.icon size={24} />
+                  </div>
                 </div>
-              </div>
-              <div className="p-8">
-                <h4 className="text-xl font-bold text-truepal-blue mb-3 group-hover:text-truepal-green transition-colors">
-                  {service.title}
-                </h4>
-                <p className="text-gray-600">
-                  {service.description}
-                </p>
-              </div>
+                <div className="p-8 flex-1 flex flex-col">
+                  <h4 className="text-xl font-bold text-truepal-blue mb-3 group-hover:text-truepal-green transition-colors">
+                    {service.title}
+                  </h4>
+                  <p className="text-gray-600 mb-4 flex-1">
+                    {service.description}
+                  </p>
+                  <div className="text-truepal-green font-semibold flex items-center mt-auto text-sm">
+                    Read more 
+                    <svg className="w-4 h-4 ml-1 transform group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
+                  </div>
+                </div>
+              </Link>
             </motion.div>
           ))}
         </div>

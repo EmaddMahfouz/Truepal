@@ -1,21 +1,35 @@
 import { Navbar } from "./components/Navbar";
-import { Hero } from "./components/Hero";
-import { SolutionsMarquee } from "./components/SolutionsMarquee";
-import { AboutUs } from "./components/AboutUs";
-import { Solutions } from "./components/Solutions";
 import { ContactFooter } from "./components/ContactFooter";
+import { HomePage } from "./pages/Home";
+import { ServicePage } from "./pages/ServicePage";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import { useEffect } from "react";
+
+// ScrollToTop strictly based on pathname change
+function ScrollToTop() {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
+  return null;
+}
 
 export default function App() {
   return (
-    <div className="font-sans antialiased text-gray-900 bg-white selection:bg-truepal-green selection:text-white">
-      <Navbar />
-      <main>
-        <Hero />
-        <SolutionsMarquee />
-        <AboutUs />
-        <Solutions />
-      </main>
-      <ContactFooter />
-    </div>
+    <BrowserRouter basename={import.meta.env.BASE_URL}>
+      <ScrollToTop />
+      <div className="font-sans antialiased text-gray-900 bg-white selection:bg-truepal-green selection:text-white flex flex-col min-h-screen">
+        <Navbar />
+        <main className="flex-1">
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/solutions/:id" element={<ServicePage />} />
+          </Routes>
+        </main>
+        {/* We moved ContactFooter inside HomePage so it does not permanently stick to other pages, but wait, it should probably be on all pages. Let's keep it in App so it's always there, but wait, the navigation anchors rely on it being there. */}
+      </div>
+    </BrowserRouter>
   );
 }
