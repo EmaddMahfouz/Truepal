@@ -51,7 +51,7 @@ export function ContactFooter() {
           <div className="bg-white rounded-2xl p-8 text-gray-800 shadow-2xl">
             <h3 className="text-2xl font-bold text-truepal-blue mb-6">Send a Message</h3>
             <form 
-              action="mailto:H.Farag@truepalgroup.com,M.Eldeeb@truepalgroup.com" 
+              action="mailto:M.Eldeeb@truepalgroup.com,H.Farag@truepalgroup.com" 
               method="GET" 
               encType="text/plain"
               className="space-y-4"

@@ -4,7 +4,7 @@ import { servicesData } from "../data/services";
 
 export function Solutions() {
   return (
-    <section id="solutions" className="py-24 bg-gray-50">
+    <section id="services" className="py-24 bg-gray-50">
       <div className="container mx-auto px-6 max-w-7xl">
         <div className="text-center max-w-3xl mx-auto mb-16">
           <h2 className="text-truepal-green font-bold tracking-widest uppercase mb-2">Our Capabilities</h2>
@@ -23,7 +23,7 @@ export function Solutions() {
               viewport={{ once: true }}
               transition={{ delay: index * 0.1, duration: 0.5 }}
             >
-              <Link to={`/solutions/${service.id}`} className="block h-full bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-shadow group border border-gray-100 flex flex-col">
+              <Link to={`/services/${service.id}`} className="block h-full bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-shadow group border border-gray-100 flex flex-col">
                 <div className="h-48 overflow-hidden relative shrink-0">
                   <div className="absolute inset-0 bg-truepal-blue/20 group-hover:bg-transparent transition-colors z-10" />
                   <img 

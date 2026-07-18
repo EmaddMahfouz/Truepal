@@ -11,17 +11,20 @@ export function ServicePage() {
     return <Navigate to="/" replace />;
   }
 
-  const relatedServices = servicesData.filter((s) => s.id !== id).slice(0, 2);
-
   return (
-    <div className="bg-white min-h-screen pt-24 pb-12">
+    <motion.div 
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.5, ease: "easeOut" }}
+      className="bg-white min-h-screen pt-24 pb-12"
+    >
       <div className="container mx-auto px-6 max-w-5xl">
         <Link 
-          to="/#solutions" 
+          to="/#services" 
           className="inline-flex items-center text-truepal-green font-semibold hover:text-truepal-green-dark mb-8 transition-colors"
         >
           <ArrowLeft className="w-5 h-5 mr-2" />
-          Back to all solutions
+          Back to all services
         </Link>
 
         <motion.div 
@@ -132,46 +135,6 @@ export function ServicePage() {
               </div>
             )}
 
-            {/* Related Services */}
-            <div className="mt-16">
-              <h2 className="text-2xl font-bold text-truepal-blue mb-8 uppercase tracking-wide border-b-2 border-truepal-green inline-block pb-2">
-                Related Services
-              </h2>
-              <div className="grid md:grid-cols-2 gap-6">
-                {relatedServices.map((related) => (
-                  <Link 
-                    key={related.id} 
-                    to={`/solutions/${related.id}`}
-                    className="group bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-shadow border border-gray-100 flex flex-col"
-                  >
-                    <div className="h-40 overflow-hidden relative shrink-0">
-                      <div className="absolute inset-0 bg-truepal-blue/10 group-hover:bg-transparent transition-colors z-10" />
-                      <img 
-                        src={related.image} 
-                        alt={related.title} 
-                        loading="lazy"
-                        className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700"
-                      />
-                    </div>
-                    <div className="p-6 flex-1 flex flex-col">
-                      <h3 className="text-xl font-bold text-truepal-blue mb-2 group-hover:text-truepal-green transition-colors">
-                        {related.title}
-                      </h3>
-                      <p className="text-gray-600 text-sm mb-4 line-clamp-2">
-                        {related.description}
-                      </p>
-                      <div className="text-truepal-green font-semibold flex items-center mt-auto text-sm">
-                        View Service 
-                        <svg className="w-4 h-4 ml-1 transform group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                        </svg>
-                      </div>
-                    </div>
-                  </Link>
-                ))}
-              </div>
-            </div>
-
             {/* Contact Us Section */}
             <div id="service-contact" className="mt-16 bg-white rounded-3xl p-8 md:p-12 shadow-sm border border-gray-100">
               <h2 className="text-3xl font-extrabold text-truepal-blue mb-2 tracking-tight">
@@ -180,7 +143,7 @@ export function ServicePage() {
               <p className="text-gray-600 mb-8 text-lg">Fill out the form below and our engineering team will get back to you shortly.</p>
               
               <form 
-                action="mailto:H.Farag@truepalgroup.com,M.Eldeeb@truepalgroup.com" 
+                action="mailto:M.Eldeeb@truepalgroup.com,H.Farag@truepalgroup.com" 
                 method="GET" 
                 encType="text/plain"
                 className="space-y-4"
@@ -234,6 +197,6 @@ export function ServicePage() {
           </div>
         </motion.div>
       </div>
-    </div>
+    </motion.div>
   );
 }

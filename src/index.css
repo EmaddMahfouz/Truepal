@@ -2,9 +2,9 @@
 @import "tailwindcss";
 
 @theme {
-  --font-sans: "Montserrat", ui-sans-serif, system-ui, sans-serif;
-  --color-truepal-blue: #004C70;
-  --color-truepal-blue-dark: #003650;
-  --color-truepal-green: #00B55A;
-  --color-truepal-green-dark: #009348;
+  --font-sans: "iCiel Gotham", "Gotham", "Montserrat", ui-sans-serif, system-ui, sans-serif;
+  --color-truepal-blue: #0a3c5d;
+  --color-truepal-blue-dark: #072a41;
+  --color-truepal-green: #00af4c;
+  --color-truepal-green-dark: #008c3d;
 }

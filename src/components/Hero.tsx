@@ -1,5 +1,5 @@
 import { motion } from "motion/react";
-import { Facebook, Instagram, Linkedin, Twitter } from "lucide-react";
+import { Facebook, Instagram, Linkedin } from "lucide-react";
 
 export function Hero() {
   return (
@@ -33,7 +33,7 @@ export function Hero() {
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.6 }}
         >
-          Specialized in swimming pools, fountains, lagoons, and heating systems.
+          Specialized in swimming pools, water features, and heating systems.
         </motion.p>
 
         <motion.div 
@@ -53,7 +53,7 @@ export function Hero() {
 
       {/* Social Links Side */}
       <div className="absolute right-6 top-1/2 -translate-y-1/2 flex flex-col gap-6 z-20">
-        {[Facebook, Instagram, Linkedin, Twitter].map((Icon, i) => (
+        {[Facebook, Instagram, Linkedin].map((Icon, i) => (
           <a 
             key={i} 
             href="#" 

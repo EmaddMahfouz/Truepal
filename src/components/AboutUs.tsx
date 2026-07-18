@@ -35,7 +35,7 @@ export function AboutUs() {
             <h3 className="text-4xl md:text-5xl font-extrabold text-truepal-blue mb-6">Expertise in Aquatic & Thermal Systems</h3>
             <div className="space-y-6 text-gray-600 text-lg leading-relaxed">
               <p>
-                <strong>TRUEPAL</strong> is a specialized company in swimming pools, fountains, lagoons, and heating systems, delivering complete and integrated solutions from concept, design, and equipment supply to installation and commissioning.
+                <strong>TRUEPAL</strong> is a specialized company in swimming pools, water features, and heating systems, delivering complete and integrated solutions from concept, design, and equipment supply to installation and commissioning.
               </p>
               <p>
                 We support contractors and companies with reliable, high-quality systems tailored to meet project requirements and timelines.
