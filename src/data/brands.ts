@@ -15,7 +15,7 @@ export const brandsData: Brand[] = [
     description: "High-performance pumps for pools and aqua parks",
     certifications: "ISO 9001, IE3 / IE4 Efficiency Classes, CE, RoHS",
     origin: "Spain",
-    image: "/images/brands/psh.png",
+    image: "https://bombaspsh.com/wp-content/uploads/2020/09/logo-2.png",
     url: "https://bombaspsh.com/en/"
   },
   {
@@ -24,7 +24,7 @@ export const brandsData: Brand[] = [
     description: "Complete range of pool equipment and accessories.",
     certifications: "ISO 9001, CE, and RoHS",
     origin: "Spain",
-    image: "/images/brands/kripsol.png",
+    image: "https://cdn.hayward.fr/production/media/6/2/1/2/b6fbde.jpg",
     url: "https://www.kripsol.co.uk/"
   },
   {
@@ -42,7 +42,7 @@ export const brandsData: Brand[] = [
     description: "Innovative fluid handling systems.",
     certifications: "ISO 9001, CE, WRAS, and AENOR",
     origin: "Spain",
-    image: "/images/brands/hidroten.png",
+    image: "https://hidroten.com/frontend/imgs/logoHidroten.png",
     url: "https://hidroten.com/en"
   },
   {
@@ -51,7 +51,7 @@ export const brandsData: Brand[] = [
     description: "Dosing pumps and automatic chemical controllers",
     certifications: "ISO 9001, CE, and RoHS",
     origin: "Italy",
-    image: "/images/brands/injecta.png",
+    image: "https://www.injecta.eu/wp-content/uploads/2024/07/35logo.png",
     url: "https://www.injecta.eu/en/"
   },
   {
@@ -60,7 +60,7 @@ export const brandsData: Brand[] = [
     description: "Transformers for safe pool lighting systems",
     certifications: "ISO 9001, CE, and RoHS",
     origin: "Italy",
-    image: "/images/brands/phonovox.png",
+    image: "https://phonovoxsa.com/wp-content/uploads/2019/09/phonovox-logotipo.png",
     url: "https://phonovoxsa.com/en/home/"
   },
   {
@@ -69,7 +69,7 @@ export const brandsData: Brand[] = [
     description: "Hot water and steam boilers",
     certifications: "ISO 9001, CE, PED, and TUV",
     origin: "Italy",
-    image: "/images/brands/ivar.png",
+    image: "https://www.ivarindustry.it/wp-content/uploads/ivarindustry.png",
     url: "https://www.ivarindustry.it/en/"
   },
   {
@@ -78,7 +78,7 @@ export const brandsData: Brand[] = [
     description: "High-efficiency heat exchangers",
     certifications: "ISO 9001, CE, and PED",
     origin: "Italy",
-    image: "/images/brands/unex.png",
+    image: "https://www.unex.at/wGlobal/wGlobal/layout/images/logo.png",
     url: "https://www.unex.at/en/"
   },
   {
@@ -87,7 +87,7 @@ export const brandsData: Brand[] = [
     description: "Hot water storage tanks",
     certifications: "ISO 9001, CE, and PED",
     origin: "Italy",
-    image: "/images/brands/sicctech.jpg",
+    image: "https://www.sicc-tech.it/images/sicc-logo-acciaio-Reg_R02.jpg",
     url: "https://www.sicc-tech.it/en/"
   },
   {
@@ -96,7 +96,7 @@ export const brandsData: Brand[] = [
     description: "Wide range of high-performance water pumps, including End suction, Vertical & Horizontal Inline, and Submersible pumps, designed for extreme durability and water management.",
     certifications: "ISO 9001, CE, WRAS, and IE3/IE4",
     origin: "Italy",
-    image: "/images/brands/pedrollo.svg",
+    image: "https://www.pedrollo.com/wp-content/uploads/2025/02/logo-fondazione.png",
     url: "https://www.pedrollo.com/en/"
   }
 ];

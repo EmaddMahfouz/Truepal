@@ -42,10 +42,26 @@ export function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.8 }}
         >
-          <a href="#about" className="px-8 py-4 bg-truepal-green text-white font-bold rounded-lg hover:bg-truepal-green-dark transition-all transform hover:scale-105 shadow-lg">
+          <a 
+            href="#about" 
+            className="px-8 py-4 bg-truepal-green text-white font-bold rounded-lg hover:bg-truepal-green-dark transition-all transform hover:scale-105 shadow-lg"
+            onClick={(e) => {
+              e.preventDefault();
+              document.getElementById("about")?.scrollIntoView({ behavior: "smooth" });
+              window.history.pushState(null, "", window.location.pathname + "#about");
+            }}
+          >
             Discover More
           </a>
-          <a href="#contact" className="px-8 py-4 bg-white/10 backdrop-blur border border-white/30 text-white font-bold rounded-lg hover:bg-white/20 transition-all shadow-lg">
+          <a 
+            href="#contact" 
+            className="px-8 py-4 bg-white/10 backdrop-blur border border-white/30 text-white font-bold rounded-lg hover:bg-white/20 transition-all shadow-lg"
+            onClick={(e) => {
+              e.preventDefault();
+              document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
+              window.history.pushState(null, "", window.location.pathname + "#contact");
+            }}
+          >
             Contact Us
           </a>
         </motion.div>

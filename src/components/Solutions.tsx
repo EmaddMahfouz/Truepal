@@ -6,22 +6,28 @@ export function Solutions() {
   return (
     <section id="services" className="py-24 bg-gray-50">
       <div className="container mx-auto px-6 max-w-7xl">
-        <div className="text-center max-w-3xl mx-auto mb-16">
+        <motion.div 
+          className="text-center max-w-3xl mx-auto mb-16"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-50px" }}
+          transition={{ duration: 0.6 }}
+        >
           <h2 className="text-truepal-green font-bold tracking-widest uppercase mb-2">Our Capabilities</h2>
           <h3 className="text-4xl font-extrabold text-truepal-blue mb-6">Our Services & Solutions</h3>
           <p className="text-gray-600 text-lg">
             We don't just supply equipment; we deliver a complete experience. We manage every technical detail of your aquatic and thermal projects to ensure a seamless journey from the first sketch.
           </p>
-        </div>
+        </motion.div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {servicesData.map((service, index) => (
             <motion.div
               key={service.id}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.1, duration: 0.5 }}
+              initial={{ opacity: 0, y: 30, scale: 0.95 }}
+              whileInView={{ opacity: 1, y: 0, scale: 1 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ delay: index * 0.15, duration: 0.6, ease: "easeOut" }}
             >
               <Link to={`/services/${service.id}`} className="block h-full bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-shadow group border border-gray-100 flex flex-col">
                 <div className="h-48 overflow-hidden relative shrink-0">

@@ -47,7 +47,7 @@ function BrandLogo({ brand, onImageLoad }: { brand: Brand, onImageLoad: () => vo
         <img 
           src={brand.image} 
           alt={`${brand.name} logo`}
-          className={`w-full h-full object-contain transition-opacity duration-300 ${isLoading ? 'opacity-0' : 'opacity-100'}`}
+          className={`w-full h-full object-contain transition-all duration-300 group-hover:scale-110 ${isLoading ? 'opacity-0' : 'opacity-100'}`}
           onLoad={handleLoad}
           onError={() => { setHasError(true); handleLoad(); }}
         />
@@ -112,7 +112,7 @@ export function Brands() {
               whileInView={isFullyLoaded ? { opacity: 1, y: 0 } : {}}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1, duration: 0.5 }}
-              className="relative block bg-truepal-blue rounded-xl p-8 pt-12 shadow-lg hover:shadow-xl transition-shadow hover:-translate-y-1 transform duration-300"
+              className="group relative block bg-truepal-blue rounded-xl p-8 pt-12 shadow-lg hover:shadow-xl transition-shadow hover:-translate-y-1 transform duration-300"
             >
               <BrandLogo brand={brand} onImageLoad={handleImageLoad} />
               
