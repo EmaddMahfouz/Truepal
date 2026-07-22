@@ -1,5 +1,4 @@
 import { TruepalLogo } from "./TruepalLogo";
-import { Facebook, Instagram, Linkedin } from "lucide-react";
 import { motion, useScroll, useTransform } from "motion/react";
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";

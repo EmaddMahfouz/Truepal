@@ -1,5 +1,12 @@
 import { motion } from "motion/react";
-import { Facebook, Instagram, Linkedin } from "lucide-react";
+import { Facebook, Instagram, Linkedin, Youtube } from "lucide-react";
+
+const socialLinks = [
+  { Icon: Linkedin, url: "https://www.linkedin.com/company/truepalgroup", label: "LinkedIn" },
+  { Icon: Instagram, url: "https://www.instagram.com/truepalgroup/", label: "Instagram" },
+  { Icon: Facebook, url: "https://www.facebook.com/TruepalGroup", label: "Facebook" },
+  { Icon: Youtube, url: "https://www.youtube.com/@TruepalGroup", label: "YouTube" }
+];
 
 export function Hero() {
   return (
@@ -68,11 +75,14 @@ export function Hero() {
       </div>
 
       {/* Social Links Side */}
-      <div className="absolute right-6 top-1/2 -translate-y-1/2 flex flex-col gap-6 z-20">
-        {[Facebook, Instagram, Linkedin].map((Icon, i) => (
+      <div className="absolute right-6 top-[55%] -translate-y-1/2 flex flex-col gap-6 z-20">
+        {socialLinks.map(({ Icon, url, label }, i) => (
           <a 
             key={i} 
-            href="#" 
+            href={url}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={label}
             className="w-10 h-10 rounded-full bg-white/10 backdrop-blur flex items-center justify-center text-white hover:bg-truepal-green transition-colors border border-white/20"
           >
             <Icon size={18} />
