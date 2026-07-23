@@ -152,9 +152,6 @@ export function ContactFooter() {
         <p className="text-blue-200 text-sm mb-4 md:mb-0">
           © {new Date().getFullYear()} TRUEPAL FOR TRADING AND CONTRACTING. All rights reserved.
         </p>
-        <a href="https://www.truepalgroup.com" className="font-semibold hover:text-truepal-green transition-colors">
-          www.truepalgroup.com
-        </a>
       </div>
     </footer>
   );
