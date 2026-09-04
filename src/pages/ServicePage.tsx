@@ -14,15 +14,40 @@ export function ServicePage() {
     return <Navigate to="/" replace />;
   }
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
     
-    // Simulate network request
-    setTimeout(() => {
-      setIsSubmitting(false);
+    const formData = new FormData(e.currentTarget);
+    const data = {
+      name: formData.get("name"),
+      email: formData.get("email"),
+      phone: formData.get("phone"),
+      subject: formData.get("subject"),
+      body: formData.get("body"),
+    };
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to send message");
+      }
+
       setIsSuccess(true);
-    }, 1500);
+      (e.target as HTMLFormElement).reset();
+    } catch (error) {
+      console.error("Error submitting contact form:", error);
+      alert("Failed to send the message. Please try again later.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -120,34 +145,6 @@ export function ServicePage() {
                 </motion.div>
               ))}
             </div>
-
-            {service.gallery && service.gallery.length > 0 && (
-              <div className="mt-16">
-                <h2 className="text-2xl font-bold text-truepal-blue mb-8 uppercase tracking-wide border-b-2 border-truepal-green inline-block pb-2">
-                  Project Gallery
-                </h2>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6">
-                  {service.gallery.map((imgUrl, idx) => (
-                    <motion.div
-                      key={idx}
-                      initial={{ opacity: 0, scale: 0.95 }}
-                      whileInView={{ opacity: 1, scale: 1 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: idx * 0.1, duration: 0.4 }}
-                      className="rounded-2xl overflow-hidden shadow-md aspect-video relative group"
-                    >
-                      <div className="absolute inset-0 bg-truepal-blue/10 group-hover:bg-transparent transition-colors z-10" />
-                      <img 
-                        src={imgUrl} 
-                        alt={`${service.title} Gallery Image ${idx + 1}`}
-                        loading="lazy"
-                        className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700" 
-                      />
-                    </motion.div>
-                  ))}
-                </div>
-              </div>
-            )}
 
             {/* Contact Us Section */}
             <div id="service-contact" className="mt-16 bg-white rounded-3xl p-8 md:p-12 shadow-sm border border-gray-100 relative">

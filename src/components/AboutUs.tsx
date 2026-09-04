@@ -13,9 +13,9 @@ export function AboutUs() {
               viewport={{ once: true }}
             />
             <img 
-              src="https://images.unsplash.com/photo-1543158097-f58c738e4a9e?auto=format&fit=crop&w=1000&q=80" 
+              src="/about-us.jfif" 
               alt="Pool and Architecture" 
-              className="relative z-10 rounded-lg shadow-2xl object-cover h-[500px] w-full"
+              className="relative z-10 rounded-lg shadow-2xl w-full h-auto object-contain"
             />
             <div className="absolute -bottom-6 -right-6 bg-truepal-blue text-white p-6 rounded-lg z-20 shadow-xl hidden sm:block">
               <p className="text-xl font-extrabold text-truepal-green uppercase tracking-wider mb-1">Truepal</p>

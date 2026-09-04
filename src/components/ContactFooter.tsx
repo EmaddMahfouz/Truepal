@@ -5,15 +5,39 @@ export function ContactFooter() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
     
-    // Simulate network request. In a real app, integrate EmailJS, SendGrid, or a custom backend API here.
-    setTimeout(() => {
-      setIsSubmitting(false);
+    const formData = new FormData(e.currentTarget);
+    const data = {
+      name: formData.get("name"),
+      email: formData.get("email"),
+      subject: formData.get("subject"),
+      body: formData.get("body"),
+    };
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to send message");
+      }
+
       setIsSuccess(true);
-    }, 1500);
+      (e.target as HTMLFormElement).reset();
+    } catch (error) {
+      console.error("Error submitting contact form:", error);
+      alert("Failed to send the message. Please try again later.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (

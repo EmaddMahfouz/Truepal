@@ -6,7 +6,7 @@ export const servicesData = [
     title: "Swimming Pools",
     description: "Residential & Commercial (Skimmer, Overflow, Infinity).",
     icon: Waves,
-    image: "https://images.unsplash.com/photo-1576013551627-0cc20b96c2a7?auto=format&fit=crop&w=1600&q=80",
+    image: "/images/our-services/Our Services-Swimming Pool.jfif",
     longDescription: "We specialize in the design, supply, and installation of premium swimming pools for both residential and commercial properties. From sleek skimmer pools to breathtaking overflow and infinity edge designs, we ensure every pool is built to the highest standards of safety, quality, and aesthetics.",
     features: [
       {
@@ -39,7 +39,7 @@ export const servicesData = [
     title: "Fountains & Water Features",
     description: "Architectural and interactive fountains.",
     icon: Droplets,
-    image: "https://images.unsplash.com/photo-1543158097-f58c738e4a9e?auto=format&fit=crop&w=1600&q=80",
+    image: "/images/our-services/Our Services - Fountains.jfif",
     longDescription: "Our fountain and water feature solutions bring architectural landscapes to life. We deliver a wide range of aesthetic and interactive designs, integrating advanced filtration, pumping, and lighting systems to create mesmerizing water displays.",
     features: [
       {
@@ -64,7 +64,7 @@ export const servicesData = [
     title: "Lagoons",
     description: "Large-scale artificial lakes and lagoons systems.",
     icon: Map,
-    image: "https://images.unsplash.com/photo-1540206395-68808572332f?auto=format&fit=crop&w=1600&q=80",
+    image: "/images/our-services/Our Services - Lagoons.jfif",
     longDescription: "We provide comprehensive engineering and supply solutions for large-scale artificial lakes and swimming lagoons. Our focus is on maintaining crystal-clear water quality across vast bodies of water utilizing advanced and eco-friendly treatment technologies.",
     features: [
       {
@@ -85,7 +85,7 @@ export const servicesData = [
     title: "Heating Solutions",
     description: "Advanced heat pumps and boiler systems for pools & Jacuzzis.",
     icon: ThermometerSun,
-    image: "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=1600&q=80",
+    image: "/images/our-services/Our Services-Heating Systems.jfif",
     longDescription: "We offer comprehensive heating and thermal solutions designed for efficiency and reliability. Whether it's maintaining the perfect pool temperature year-round or supplying industrial-grade hot water systems, our advanced technologies deliver consistent performance.",
     features: [
       {
@@ -118,7 +118,7 @@ export const servicesData = [
     title: "Wellness & Jacuzzis",
     description: "Custom-built and pre-fabricated luxury systems.",
     icon: Sparkles,
-    image: "https://images.unsplash.com/photo-1590487988358-854746654261?auto=format&fit=crop&w=1600&q=80",
+    image: "/images/our-services/Our Services - Wellness & Jacuzzis.jfif",
     longDescription: "Immerse in unparalleled luxury with our custom-built and pre-fabricated Jacuzzis and wellness systems. Designed for relaxation and therapeutic benefits, our installations combine top-tier materials with sophisticated hydro-massage technology.",
     features: [
       {
