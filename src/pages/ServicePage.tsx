@@ -2,7 +2,7 @@ import { useParams, Navigate, Link } from "react-router-dom";
 import { servicesData } from "../data/services";
 import { motion } from "motion/react";
 import { ArrowLeft, CheckCircle2 } from "lucide-react";
-import { useState } from "react";
+import React, { useState } from "react";
 
 export function ServicePage() {
   const { id } = useParams();

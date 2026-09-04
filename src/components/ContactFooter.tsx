@@ -1,5 +1,5 @@
 import { MapPin, Phone, Mail } from "lucide-react";
-import { useState } from "react";
+import React, { useState } from "react";
 
 export function ContactFooter() {
   const [isSubmitting, setIsSubmitting] = useState(false);
