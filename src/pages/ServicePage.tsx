@@ -1,17 +1,14 @@
 import { useParams, Navigate, Link } from "react-router-dom";
 import { servicesData } from "../data/services";
 import { motion } from "motion/react";
-import { ArrowLeft, CheckCircle2, MessageCircle, Send } from "lucide-react";
+import { ArrowLeft, CheckCircle2 } from "lucide-react";
 import React, { useState } from "react";
-import { sendContactMessage, createMailtoLink, createWhatsAppLink, ContactFormData } from "../lib/contact";
 
 export function ServicePage() {
   const { id } = useParams();
   const service = servicesData.find((s) => s.id === id);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
-  const [successMessage, setSuccessMessage] = useState("");
-  const [lastData, setLastData] = useState<ContactFormData | null>(null);
 
   if (!service) {
     return <Navigate to="/" replace />;
@@ -22,30 +19,32 @@ export function ServicePage() {
     setIsSubmitting(true);
     
     const formData = new FormData(e.currentTarget);
-    const data: ContactFormData = {
-      name: String(formData.get("name") || ""),
-      email: String(formData.get("email") || ""),
-      phone: String(formData.get("phone") || ""),
-      subject: String(formData.get("subject") || `Inquiry about ${service.title}`),
-      body: String(formData.get("body") || ""),
+    const data = {
+      name: formData.get("name"),
+      email: formData.get("email"),
+      phone: formData.get("phone"),
+      subject: formData.get("subject"),
+      body: formData.get("body"),
     };
-    setLastData(data);
 
     try {
-      const res = await sendContactMessage(data);
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
 
-      if (res.success) {
-        setIsSuccess(true);
-        setSuccessMessage(res.message || "Thank you for your inquiry. Our team will get back to you shortly.");
-        (e.target as HTMLFormElement).reset();
-      } else {
-        const mailto = createMailtoLink(data);
-        window.location.href = mailto;
+      if (!response.ok) {
+        throw new Error("Failed to send message");
       }
+
+      setIsSuccess(true);
+      (e.target as HTMLFormElement).reset();
     } catch (error) {
       console.error("Error submitting contact form:", error);
-      const mailto = createMailtoLink(data);
-      window.location.href = mailto;
+      alert("Failed to send the message. Please try again later.");
     } finally {
       setIsSubmitting(false);
     }
@@ -162,56 +161,29 @@ export function ServicePage() {
                   <div className="w-16 h-16 bg-truepal-green/20 rounded-full flex items-center justify-center mb-4">
                     <svg className="w-8 h-8 text-truepal-green" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
                   </div>
-                  <h4 className="text-xl font-bold text-truepal-blue mb-2">Inquiry Received!</h4>
-                  <p className="text-gray-600 mb-6 max-w-md">{successMessage || "Thank you for your inquiry. Our engineering team will get back to you shortly."}</p>
-                  
-                  <div className="flex flex-wrap gap-4 justify-center">
-                    {lastData && (
-                      <a
-                        href={createWhatsAppLink("201065272264", `Hi TRUEPAL, I submitted an inquiry about ${service.title}: "${lastData.body.slice(0, 100)}..."`)}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="px-6 py-3 bg-[#25D366] text-white font-semibold rounded-lg hover:bg-[#1EBE5D] transition-colors flex items-center gap-2 shadow-md"
-                      >
-                        <MessageCircle size={18} />
-                        WhatsApp Follow-up
-                      </a>
-                    )}
-                    <button 
-                      onClick={() => setIsSuccess(false)}
-                      className="px-6 py-3 bg-gray-100 hover:bg-gray-200 text-gray-800 font-semibold rounded-lg transition-colors"
-                    >
-                      Send Another Inquiry
-                    </button>
-                  </div>
+                  <h4 className="text-xl font-bold text-truepal-blue mb-2">Message Sent!</h4>
+                  <p className="text-gray-600 mb-6">Thank you for your inquiry. Our engineering team will get back to you shortly.</p>
+                  <button 
+                    onClick={() => setIsSuccess(false)}
+                    className="px-6 py-2 bg-gray-100 hover:bg-gray-200 text-gray-800 font-semibold rounded-lg transition-colors"
+                  >
+                    Send Another Inquiry
+                  </button>
                 </div>
               ) : (
                 <>
-                  <div className="flex flex-col md:flex-row md:items-center justify-between mb-8 gap-4">
-                    <div>
-                      <h2 className="text-3xl font-extrabold text-truepal-blue mb-2 tracking-tight">
-                        {service.ctaText || `Inquire About ${service.title}`}
-                      </h2>
-                      <p className="text-gray-600 text-lg">Fill out the form below and our engineering team will get back to you shortly.</p>
-                    </div>
-                    <a
-                      href={createWhatsAppLink("201065272264", `Hello TRUEPAL, I am interested in consulting about ${service.title}.`)}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-[#25D366] text-white font-semibold hover:bg-[#1EBE5D] transition-colors shadow-md text-sm shrink-0 self-start"
-                    >
-                      <MessageCircle size={18} />
-                      WhatsApp Instant Chat
-                    </a>
-                  </div>
+                  <h2 className="text-3xl font-extrabold text-truepal-blue mb-2 tracking-tight">
+                    {service.ctaText || `Inquire About ${service.title}`}
+                  </h2>
+                  <p className="text-gray-600 mb-8 text-lg">Fill out the form below and our engineering team will get back to you shortly.</p>
                   
                   <form 
                     onSubmit={handleSubmit}
                     className="space-y-4"
                   >
-                    <div className="grid md:grid-cols-3 gap-4">
+                    <div className="grid md:grid-cols-2 gap-4">
                       <div>
-                        <label className="block text-sm font-semibold text-gray-600 mb-1">Name *</label>
+                        <label className="block text-sm font-semibold text-gray-600 mb-1">Name</label>
                         <input 
                           type="text" 
                           name="name"
@@ -221,7 +193,7 @@ export function ServicePage() {
                         />
                       </div>
                       <div>
-                        <label className="block text-sm font-semibold text-gray-600 mb-1">Email *</label>
+                        <label className="block text-sm font-semibold text-gray-600 mb-1">Email</label>
                         <input 
                           type="email" 
                           name="email"
@@ -230,18 +202,9 @@ export function ServicePage() {
                           placeholder="Your Email"
                         />
                       </div>
-                      <div>
-                        <label className="block text-sm font-semibold text-gray-600 mb-1">Phone</label>
-                        <input 
-                          type="tel" 
-                          name="phone"
-                          className="w-full px-4 py-3 rounded-lg bg-gray-50 border border-gray-200 focus:outline-none focus:ring-2 focus:ring-truepal-green focus:border-transparent transition-all"
-                          placeholder="+20 100 000 0000"
-                        />
-                      </div>
                     </div>
                     <div>
-                      <label className="block text-sm font-semibold text-gray-600 mb-1">Subject *</label>
+                      <label className="block text-sm font-semibold text-gray-600 mb-1">Subject</label>
                       <input 
                         type="text" 
                         name="subject"
@@ -252,37 +215,32 @@ export function ServicePage() {
                       />
                     </div>
                     <div>
-                      <label className="block text-sm font-semibold text-gray-600 mb-1">Message *</label>
+                      <label className="block text-sm font-semibold text-gray-600 mb-1">Message</label>
                       <textarea 
                         name="body"
                         required
                         rows={4}
                         className="w-full px-4 py-3 rounded-lg bg-gray-50 border border-gray-200 focus:outline-none focus:ring-2 focus:ring-truepal-green focus:border-transparent transition-all resize-none"
-                        placeholder="Please describe your project requirements..."
+                        placeholder="How can we help you?"
                       ></textarea>
                     </div>
-                    <div className="flex flex-col sm:flex-row gap-4 pt-2">
-                      <button 
-                        type="submit"
-                        disabled={isSubmitting}
-                        className={`w-full sm:w-auto px-10 bg-truepal-green hover:bg-truepal-green-dark text-white font-bold py-4 rounded-lg transition-colors shadow-lg shadow-truepal-green/20 text-lg flex items-center justify-center gap-2 ${isSubmitting ? 'opacity-75 cursor-not-allowed' : ''}`}
-                      >
-                        {isSubmitting ? (
-                          <>
-                            <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                              <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                              <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                            </svg>
-                            Sending...
-                          </>
-                        ) : (
-                          <>
-                            <Send size={18} />
-                            {service.ctaText || "Send Inquiry"}
-                          </>
-                        )}
-                      </button>
-                    </div>
+                    <button 
+                      type="submit"
+                      disabled={isSubmitting}
+                      className={`w-full md:w-auto px-10 bg-truepal-green hover:bg-truepal-green-dark text-white font-bold py-4 rounded-lg transition-colors shadow-lg shadow-truepal-green/20 mt-4 text-lg flex items-center justify-center ${isSubmitting ? 'opacity-75 cursor-not-allowed' : ''}`}
+                    >
+                      {isSubmitting ? (
+                        <>
+                          <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                          </svg>
+                          Sending...
+                        </>
+                      ) : (
+                        service.ctaText || "Send Inquiry"
+                      )}
+                    </button>
                   </form>
                 </>
               )}
