@@ -17,15 +17,25 @@ export function getAssetUrl(path: string): string {
 
   // Strip leading slash or dot-slash
   let clean = path;
-  if (clean.startsWith('./')) {
-    clean = clean.slice(2);
-  } else if (clean.startsWith('/')) {
-    clean = clean.slice(1);
+  while (clean.startsWith('./') || clean.startsWith('/')) {
+    clean = clean.startsWith('./') ? clean.slice(2) : clean.slice(1);
   }
 
-  // Read BASE_URL from Vite's import.meta.env or fallback to './'
+  // 1. In browser runtime, check if we are on github.io with a repository subpath
+  if (typeof window !== 'undefined') {
+    const hostname = window.location.hostname;
+    const pathname = window.location.pathname;
+
+    if (hostname.endsWith('github.io')) {
+      const segments = pathname.split('/').filter(Boolean);
+      const repo = segments[0] || 'Truepal';
+      return `/${repo}/${clean}`;
+    }
+  }
+
+  // 2. Vite base URL or root fallback
   const metaEnv = (import.meta as unknown as { env?: { BASE_URL?: string } }).env;
-  const base = metaEnv?.BASE_URL || './';
+  const base = metaEnv?.BASE_URL || '/';
   const normalizedBase = base.endsWith('/') ? base : `${base}/`;
 
   return `${normalizedBase}${clean}`;

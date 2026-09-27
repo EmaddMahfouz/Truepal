@@ -14,12 +14,12 @@ export function AboutUs() {
               viewport={{ once: true }}
             />
             <img 
-              src={getAssetUrl("about-us.jfif")} 
+              src={getAssetUrl("about-us.jpg")} 
               onError={(e) => {
                 const target = e.currentTarget;
                 if (!target.dataset.triedFallback) {
                   target.dataset.triedFallback = "true";
-                  target.src = getAssetUrl("about-us.jpg");
+                  target.src = getAssetUrl("about-us.jfif");
                 }
               }}
               alt="Pool and Architecture" 

@@ -1,33 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { motion } from "motion/react";
 import { brandsData, Brand } from "../data/brands";
-
-function BrandSkeleton() {
-  return (
-    <div className="relative bg-gray-50 rounded-xl p-8 pt-12 shadow-sm border border-gray-100">
-      <div className="absolute -top-12 left-8 w-32 h-32 bg-gray-200 rounded-full border-[3px] border-white animate-pulse" />
-      
-      <div className="ml-[120px] sm:ml-[140px] mb-6">
-        <div className="h-8 bg-gray-200 rounded w-2/3 animate-pulse" />
-      </div>
-
-      <div className="space-y-4">
-        <div className="flex items-start">
-          <div className="w-1.5 h-1.5 rounded-full bg-gray-200 mt-2 mr-3 shrink-0 animate-pulse" />
-          <div className="h-4 bg-gray-200 rounded w-full animate-pulse" />
-        </div>
-        <div className="flex items-start">
-          <div className="w-1.5 h-1.5 rounded-full bg-gray-200 mt-2 mr-3 shrink-0 animate-pulse" />
-          <div className="h-4 bg-gray-200 rounded w-5/6 animate-pulse" />
-        </div>
-        <div className="flex items-start">
-          <div className="w-1.5 h-1.5 rounded-full bg-gray-200 mt-2 mr-3 shrink-0 animate-pulse" />
-          <div className="h-4 bg-gray-200 rounded w-1/2 animate-pulse" />
-        </div>
-      </div>
-    </div>
-  );
-}
 
 function BrandLogo({ brand, onImageLoad }: { brand: Brand, onImageLoad: () => void }) {
   const [hasError, setHasError] = useState(false);
@@ -71,25 +44,6 @@ function BrandLogo({ brand, onImageLoad }: { brand: Brand, onImageLoad: () => vo
 }
 
 export function Brands() {
-  const [isPageLoaded, setIsPageLoaded] = useState(false);
-  const [loadedImagesCount, setLoadedImagesCount] = useState(0);
-
-  // Simulate page content fetching
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsPageLoaded(true);
-    }, 1000);
-    return () => clearTimeout(timer);
-  }, []);
-
-  const handleImageLoad = () => {
-    setLoadedImagesCount(prev => prev + 1);
-  };
-
-  // We consider it fully loaded when both the simulated page load is done 
-  // and all brand images are loaded (or errored out).
-  const isFullyLoaded = isPageLoaded && loadedImagesCount >= brandsData.length;
-
   return (
     <section id="products" className="py-24 bg-white">
       <div className="container mx-auto px-6 max-w-7xl">
@@ -101,17 +55,7 @@ export function Brands() {
           </p>
         </div>
 
-        {/* Skeleton Grid - Displayed while loading */}
-        {!isFullyLoaded && (
-          <div className="grid md:grid-cols-2 gap-x-8 gap-y-16 mt-20">
-            {[...Array(brandsData.length || 6)].map((_, i) => (
-              <BrandSkeleton key={`skeleton-${i}`} />
-            ))}
-          </div>
-        )}
-
-        {/* Hidden Preload Grid - To trigger image loading without showing partial layout */}
-        <div className={!isFullyLoaded ? "opacity-0 absolute pointer-events-none h-0 overflow-hidden" : "grid md:grid-cols-2 gap-x-8 gap-y-16 mt-20"}>
+        <div className="grid md:grid-cols-2 gap-x-8 gap-y-16 mt-20">
           {brandsData.map((brand, index) => (
             <motion.a
               href={brand.url}
@@ -119,12 +63,12 @@ export function Brands() {
               rel="noopener noreferrer"
               key={brand.id}
               initial={{ opacity: 0, y: 20 }}
-              whileInView={isFullyLoaded ? { opacity: 1, y: 0 } : {}}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: index * 0.1, duration: 0.5 }}
+              transition={{ delay: index * 0.05, duration: 0.4 }}
               className="group relative block bg-truepal-blue rounded-xl p-8 pt-12 shadow-lg hover:shadow-xl transition-shadow hover:-translate-y-1 transform duration-300"
             >
-              <BrandLogo brand={brand} onImageLoad={handleImageLoad} />
+              <BrandLogo brand={brand} onImageLoad={() => {}} />
               
               <div className="ml-[120px] sm:ml-[140px] mb-6">
                  <h4 className="text-xl sm:text-2xl font-bold text-truepal-green">{brand.name}</h4>
