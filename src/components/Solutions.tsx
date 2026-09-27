@@ -34,6 +34,14 @@ export function Solutions() {
                   <div className="absolute inset-0 bg-truepal-blue/20 group-hover:bg-transparent transition-colors z-10" />
                   <img 
                     src={service.image} 
+                    onError={(e) => {
+                      const target = e.currentTarget;
+                      const fallback = (service as { fallbackImage?: string }).fallbackImage;
+                      if (fallback && !target.dataset.triedFallback) {
+                        target.dataset.triedFallback = "true";
+                        target.src = fallback;
+                      }
+                    }}
                     alt={service.title} 
                     className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700"
                   />

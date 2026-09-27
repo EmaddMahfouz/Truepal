@@ -1,4 +1,5 @@
 import { motion } from "motion/react";
+import { getAssetUrl } from "../lib/assets";
 
 export function AboutUs() {
   return (
@@ -13,7 +14,14 @@ export function AboutUs() {
               viewport={{ once: true }}
             />
             <img 
-              src="/about-us.jfif" 
+              src={getAssetUrl("about-us.jfif")} 
+              onError={(e) => {
+                const target = e.currentTarget;
+                if (!target.dataset.triedFallback) {
+                  target.dataset.triedFallback = "true";
+                  target.src = getAssetUrl("about-us.jpg");
+                }
+              }}
               alt="Pool and Architecture" 
               className="relative z-10 rounded-lg shadow-2xl w-full h-auto object-contain"
             />

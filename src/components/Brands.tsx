@@ -32,10 +32,20 @@ function BrandSkeleton() {
 function BrandLogo({ brand, onImageLoad }: { brand: Brand, onImageLoad: () => void }) {
   const [hasError, setHasError] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [currentSrc, setCurrentSrc] = useState(brand.image);
 
   const handleLoad = () => {
     setIsLoading(false);
     onImageLoad();
+  };
+
+  const handleError = () => {
+    if (brand.fallbackImage && currentSrc !== brand.fallbackImage) {
+      setCurrentSrc(brand.fallbackImage);
+    } else {
+      setHasError(true);
+      handleLoad();
+    }
   };
 
   return (
@@ -45,11 +55,11 @@ function BrandLogo({ brand, onImageLoad }: { brand: Brand, onImageLoad: () => vo
       )}
       {!hasError ? (
         <img 
-          src={brand.image} 
+          src={currentSrc} 
           alt={`${brand.name} logo`}
           className={`w-full h-full object-contain transition-all duration-300 group-hover:scale-110 ${isLoading ? 'opacity-0' : 'opacity-100'}`}
           onLoad={handleLoad}
-          onError={() => { setHasError(true); handleLoad(); }}
+          onError={handleError}
         />
       ) : (
         <span className="text-truepal-green font-bold text-center leading-tight">
